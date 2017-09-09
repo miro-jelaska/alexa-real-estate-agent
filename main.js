@@ -21,13 +21,16 @@ const state = {
     roomSize_05_doesItSoundOk: 'roomSize_05_doesItSoundOk',
     roomSize_02_01_rentOrBuy: 'roomSize_02_01_rentOrBuy'
 }
-const stateCommands = [];
+const stateCommands = {};
 function addCommand(newCommand){
     console.log(newCommand);
     newCommand.stop = function(){
          gotoState.call(this, state.exit, 'Ok, stoping now.');
     }
-    stateCommands.push(newCommand);
+    newCommand.error = function(){
+        gotoState.call(this, active, 'I didn’t hear you well');
+   }
+    stateCommands[newCommand.id] = newCommand;
 }
 
 [
@@ -41,9 +44,6 @@ function addCommand(newCommand){
         },
         no: function(){
             gotoState.call(this, state.exit, 'Ok, I\'ll be here if you need me. Till then...');
-        },
-        unhandled: function() {
-            this.emit(':tell', 'Sorry, I didn\'t get that.');
         }
     },
     {
@@ -71,7 +71,7 @@ function addCommand(newCommand){
     {
         id: state.roomSize_advice,
         value: function() {
-            return 'To come up with a rough estimate, think about what your future needs will be. Is this enough information for you to take a guess?';
+            return 'To come up with a rough estimate, think about what your future needs will be. <break time="200ms"/> Current family size. Future family size. Do you have guests often? things like that. <break time="500ms"/> Is this enough information for you to take a guess?';
         },
         yes: function(){
             gotoState.call(this, state.roomSize);
@@ -154,7 +154,7 @@ function addCommand(newCommand){
             gotoState.call(this, state.exit, 'Fantastic! Let\'s move on to the next question.');
         },
         no: function(){
-            gotoState.call(this, state.roomSize_01_howManyPeople, 'Ok. Let\'s try this again.');
+            gotoState.call(this, state.roomSize, 'Ok. Let\'s try this again <break time="400ms"/>');
         },
     },
     {
@@ -185,7 +185,13 @@ function gotoState(nextState, textOnTransition){
 
 var stateHandlers = {
     'NewSession': function() {
+        console.log('> NewSession');
         initState.call(this);
+    },
+    // When Alexa does not understand a question it invokes first available intention
+    'Error': function(){
+        console.log('> Error');
+        stateCommands[active].error.call(this);
     },
     'Advice': function(){
         console.log('> Advice');
@@ -217,11 +223,6 @@ var stateHandlers = {
     },
     'SessionEndedRequest': function () {
         console.log('> SessionEndedRequest');
-        
         this.emit(':tell', 'Goodbye!');
-    },
-    'Unhandled': function(){
-        console.log('> Unhandled');
-        stateCommands[active].unhandled.call(this);
     }
 };
