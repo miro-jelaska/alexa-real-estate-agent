@@ -10,10 +10,10 @@ exports.handler = function(event, context, callback) {
 };
 
 const state = {
-    wellcome: 'START',
-    roomSize: 'ROOMSIZE',
-    roomSizeAdvice: 'ROOMSIZEADVICE',
-    exit: 'EXIT',
+    wellcome: 'wellcome',
+    roomSize: 'roomSize',
+    roomSize_advice: 'roomSize_advice',
+    exit: 'exitEXIT',
     roomSize_01_howManyPeople: 'roomSize_01_howManyPeople',
     roomSize_02_fiveYearsOrMore: 'roomSize_02_fiveYearsOrMore',
     roomSize_03_numberOfPeopleInFiveYears: 'roomSize_03_numberOfPeopleInFiveYears',
@@ -21,9 +21,18 @@ const state = {
     roomSize_05_doesItSoundOk: 'roomSize_05_doesItSoundOk',
     roomSize_02_01_rentOrBuy: 'roomSize_02_01_rentOrBuy'
 }
+const stateCommands = [];
+function addCommand(newCommand){
+    console.log(newCommand);
+    newCommand.stop = function(){
+         gotoState.call(this, state.exit, 'Ok, stoping now.');
+    }
+    stateCommands.push(newCommand);
+}
 
-const stateCommands = {
-    [state.wellcome]: {
+[
+    {
+        id: state.wellcome,
         value: function() {
             return 'Would you like to buy a house?';
         },
@@ -33,9 +42,12 @@ const stateCommands = {
         no: function(){
             gotoState.call(this, state.exit, 'Ok, I\'ll be here if you need me. Till then...');
         },
-        
+        unhandled: function() {
+            this.emit(':tell', 'Sorry, I didn\'t get that.');
+        }
     },
-    [state.roomSize]:{
+    {
+        id: state.roomSize,
         value: function() {
             return 'How many bedrooms are you looking for in your new home?';
         },
@@ -56,7 +68,8 @@ const stateCommands = {
             gotoState.call(this, state.exit, 'Great. Let\'s move on to the next question.');
         },
     },
-    [state.roomSize_advice]:{
+    {
+        id: state.roomSize_advice,
         value: function() {
             return 'To come up with a rough estimate, think about what your future needs will be. Is this enough information for you to take a guess?';
         },
@@ -67,7 +80,8 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_01_howManyPeople);
         },
     },
-    [state.roomSize_01_howManyPeople]:{
+    {
+        id: state.roomSize_01_howManyPeople,
         value: function() {
             return 'Okay. No problem. Let me walk you through the process of figuring it out. How many people are in your current household?';
         },
@@ -77,7 +91,8 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_02_fiveYearsOrMore);
         }
     },
-    [state.roomSize_02_fiveYearsOrMore]:{
+    {
+        id: state.roomSize_02_fiveYearsOrMore,
         value: function() {
             return 'Do you plan on living in your new house for five  years or more?';
         },
@@ -88,7 +103,8 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_02_01_rentOrBuy);
         },
     },
-    [state.roomSize_02_01_rentOrBuy]:{
+    {
+        id: state.roomSize_02_01_rentOrBuy,
         value: function() {
             return 'Renting is a great solution for periods of less than five years. Are you sure you want to buy?';
         },
@@ -100,7 +116,8 @@ const stateCommands = {
             gotoState.call(this, state.exit, 'Great. Glad I could help you with your future plans. Good bye!');
         },
     },
-    [state.roomSize_03_numberOfPeopleInFiveYears]: {
+    {
+        id: state.roomSize_03_numberOfPeopleInFiveYears,
         value: function() {
             console.log('roomSize_03_numberOfPeopleInFiveYears > value');
             return 'Great. How many people do you think will be living in your new house in five years?';
@@ -112,7 +129,8 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_04_anyExtraGuests);
         }
     },
-    [state.roomSize_04_anyExtraGuests]: {
+    {
+        id: state.roomSize_04_anyExtraGuests,
         value: function() {
             return 'Would you like an extra room for your guests?';
         },
@@ -127,7 +145,8 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_05_doesItSoundOk);
         },
     },
-    [state.roomSize_05_doesItSoundOk]:{
+    {
+        id: state.roomSize_05_doesItSoundOk,
         value: function() {
             return 'Based on your answers, I would recommend ' + this.attributes['finalNumberOfPeople'] + ' bedrooms. Does that sound like a  good guess for now?';
         },
@@ -138,12 +157,14 @@ const stateCommands = {
             gotoState.call(this, state.roomSize_01_howManyPeople, 'Ok. Let\'s try this again.');
         },
     },
-    [state.exit]: {
+    {
+        id: state.exit,
         value: function() {
             return 'Hope we helped you!';
         }
     }
-}
+].forEach(addCommand);
+
 
 function initState(){
     active =  state.wellcome;
@@ -185,6 +206,7 @@ var stateHandlers = {
     },
     'AMAZON.StopIntent': function() {
         console.log('> AMAZON.StopIntent');
+        console.log(stateCommands[active].stop);
         
         stateCommands[active].stop.call(this);
     },
@@ -197,5 +219,9 @@ var stateHandlers = {
         console.log('> SessionEndedRequest');
         
         this.emit(':tell', 'Goodbye!');
+    },
+    'Unhandled': function(){
+        console.log('> Unhandled');
+        stateCommands[active].unhandled.call(this);
     }
 };
