@@ -112,20 +112,17 @@ function addCommand(newCommand){
             gotoState.call(this, stateIds.roomSize_03_numberOfPeopleInFiveYears);
         },
         no: function(){
-            console.log('roomSize_02_01_rentOrBuy > no');
             gotoState.call(this, stateIds.exit, 'Great. Glad I could help you with your future plans. Good bye!');
         },
     },
     {
         id: stateIds.roomSize_03_numberOfPeopleInFiveYears,
         value: function() {
-            console.log('roomSize_03_numberOfPeopleInFiveYears > value');
             return 'Great. How many people do you think will be living in your new house in five years?';
         },
         numberOf: function(){
             var peopleCountSlotRaw = this.event.request.intent.slots.numericalValue.value;
             this.attributes['numberOfPeopleInFiveYears'] = peopleCountSlotRaw;
-            console.log("this.attributes['numberOfPeopleInFiveYears']", this.attributes['numberOfPeopleInFiveYears']);
             gotoState.call(this, stateIds.roomSize_04_anyExtraGuests);
         }
     },
