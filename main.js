@@ -10,10 +10,7 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
-/** 
- * Dictionary of statesIds with their unique values. Used primarily for convenience as enumeration. In ES6 I suggest using Symbols instead of uniqe strings.
- * @type {Object.<string, string>}
- */
+/** Dictionary of statesIds with their unique values. Used primarily for convenience as enumeration. In ES6 I suggest using Symbols instead of uniqe strings. */
 const stateIds = {
     wellcome: 'wellcome',
     roomSize: 'roomSize',
