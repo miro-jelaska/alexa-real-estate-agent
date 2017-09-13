@@ -10,6 +10,10 @@ exports.handler = function(event, context, callback) {
     alexa.execute();
 };
 
+/** 
+ * Dictionary of statesIds with their unique values. Used primarily for convenience as enumeration. In ES6 I suggest using Symbols instead of uniqe strings.
+ * @type {Object.<string, string>}
+ */
 const stateIds = {
     wellcome: 'wellcome',
     roomSize: 'roomSize',
@@ -22,7 +26,10 @@ const stateIds = {
     roomSize_05_doesItSoundOk: 'roomSize_05_doesItSoundOk',
     roomSize_02_01_rentOrBuy: 'roomSize_02_01_rentOrBuy'
 }
+/** Dictionary with stateId as key and command as value. */
 const stateCommands = {};
+
+/** Takes command, extends its functionality, and then adds into stateCommands dictionary. */
 function addCommand(newCommand){
     newCommand.stop = function(){
          gotoState.call(this, stateIds.exit, 'Ok, stoping now.');
@@ -31,6 +38,25 @@ function addCommand(newCommand){
         gotoState.call(this, active.id, 'I didn’t hear you well');
     }
     stateCommands[newCommand.id] = newCommand;
+}
+
+/** Sets system to the initial state. Since it is supposed to be triggered at "startup" it should be invoked inside 'NewSession'. */
+function initState(){
+    active = stateCommands[stateIds.wellcome];
+    this.emit(':ask', active.value.call(this));
+}
+
+/** Transitions system to the next state. Optionaly it can say some text on transition. */
+function gotoState(nextState, textOnTransition){
+    if(nextState === stateIds.exit){
+        this.emit(':tell', textOnTransition);
+    } 
+    else {
+        var response = active.value.call(this);
+        var isDone = active.isDone;
+        active = stateCommands[nextState];
+        this.emit(':ask', (textOnTransition || '') +  active.value.call(this));
+    }
 }
 
 [
@@ -161,24 +187,6 @@ function addCommand(newCommand){
         }
     }
 ].forEach(addCommand);
-
-
-function initState(){
-    active = stateCommands[stateIds.wellcome];
-    this.emit(':ask', active.value.call(this));
-}
-
-function gotoState(nextState, textOnTransition){
-    if(nextState === stateIds.exit){
-        this.emit(':tell', textOnTransition);
-    } 
-    else {
-        var response = active.value.call(this);
-        var isDone = active.isDone;
-        active = stateCommands[nextState];
-        this.emit(':ask', (textOnTransition || '') +  active.value.call(this));
-    }
-}
 
 var stateHandlers = {
     'NewSession': function() {
