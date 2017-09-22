@@ -80,12 +80,10 @@ function gotoState(nextState, textOnTransition){
         no: function(){
             gotoState.call(this, stateIds.exit);
         },
-        advice: function(){
-            console.log(' state.roomSize > advice');        
+        advice: function(){   
             gotoState.call(this, stateIds.roomSize_advice);
         },
         numberOf: function(){
-            console.log(' state.roomSize > numberOf');
             var roomNumberSlotRaw = this.event.request.intent.slots.numericalValue.value;
             this.attributes['numberOfRooms'] = roomNumberSlotRaw;
             gotoState.call(this, stateIds.exit, 'Great. Let\'s move on to the next question.');
