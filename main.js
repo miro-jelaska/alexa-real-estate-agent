@@ -153,12 +153,14 @@ function gotoState(nextState, textOnTransition){
             return 'Would you like an extra room for your guests?';
         },
         yes: function(){
-            var finalNumberOfPeople = Math.ceil((Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears']) + 1)/2);
+            var maxPeopleDefined = Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears']);
+            var finalNumberOfPeople = Math.ceil((maxPeopleDefined + 1) / 2);
             this.attributes['finalNumberOfPeople'] = finalNumberOfPeople;
             gotoState.call(this, stateIds.roomSize_05_doesItSoundOk);
         },
         no: function(){
-            var finalNumberOfPeople = Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears'])/2;
+            var maxPeopleDefined = Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears']);
+            var finalNumberOfPeople = Math.ceil(maxPeopleDefined / 2);
             this.attributes['finalNumberOfPeople'] = finalNumberOfPeople;
             gotoState.call(this, stateIds.roomSize_05_doesItSoundOk);
         },
