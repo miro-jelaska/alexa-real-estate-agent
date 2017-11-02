@@ -154,21 +154,21 @@ function gotoState(nextState, textOnTransition){
         },
         yes: function(){
             var maxPeopleDefined = Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears']);
-            var finalNumberOfPeople = Math.ceil((maxPeopleDefined + 1) / 2);
-            this.attributes['finalNumberOfPeople'] = finalNumberOfPeople;
+            var suggestedNumberOfBedrooms = Math.ceil((maxPeopleDefined + 1) / 2);
+            this.attributes['suggestedNumberOfBedrooms'] = suggestedNumberOfBedrooms;
             gotoState.call(this, stateIds.roomSize_05_doesItSoundOk);
         },
         no: function(){
             var maxPeopleDefined = Math.max(this.attributes['numberOfPeople'], this.attributes['numberOfPeopleInFiveYears']);
-            var finalNumberOfPeople = Math.ceil(maxPeopleDefined / 2);
-            this.attributes['finalNumberOfPeople'] = finalNumberOfPeople;
+            var suggestedNumberOfBedrooms = Math.ceil(maxPeopleDefined / 2);
+            this.attributes['suggestedNumberOfBedrooms'] = suggestedNumberOfBedrooms;
             gotoState.call(this, stateIds.roomSize_05_doesItSoundOk);
         },
     },
     {
         id: stateIds.roomSize_05_doesItSoundOk,
         value: function() {
-            return 'Based on your answers, I would recommend ' + this.attributes['finalNumberOfPeople'] + ' bedrooms. Does that sound like a  good guess for now?';
+            return 'Based on your answers, I would recommend ' + this.attributes['suggestedNumberOfBedrooms'] + ' bedrooms. Does that sound like a  good guess for now?';
         },
         yes: function(){
             gotoState.call(this, stateIds.exit, 'Fantastic! Let\'s move on to the next question.');
