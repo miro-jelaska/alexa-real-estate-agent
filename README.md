@@ -3,7 +3,7 @@ Amazon Alexa intent with multiple interconnected states.
 
 # Storyline diagram
 
-[![Storyline diagram](readme-resources/diagram-low-resolution.png)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram%20%5Bmedium-resolution%5D.png "Click to open larger diagram")
+[![Storyline diagram](readme-resources/diagram-low-resolution.png)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-medium-resolution.png "Click to open larger diagram")
 
 Download diagram:
 
