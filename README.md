@@ -58,13 +58,22 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 # 2. How to replicate
 These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
 
-## 2.1. Create interaction model
+## 2.1. Creating basic skill
 1. Go to [Amazon Developer console](https://developer.amazon.com) > "Alexa"
 2. Pick "Get Started >" from "Alexa Skills Kit"
 
 <img src="readme-resources/alexa-skill-kit-get-started.png" alt="alexa-skill-kit-get-started" width="150"/> 
 3. Select "Add a New Skill" and fillout the "Skill information" tab as on the image below
 <img src="readme-resources/create-a-new-alexa-skill-01-skill-information.jpg" alt="alexa-skill-kit-get-started" /> 
+
+4. Press "Save"
+5. Press "Next" which will lead you to "Interaction Model" tab. Continue to 2.2. Inteaction model
+
+## 2.2 Interaction model
+1. Lanuch "Skill Builder" (which is curently in beta)
+2. Go to "Code Editor" tab
+3. Either upload interaction model JSON file or copy/paste content from provided interaction model. 📥 Download [interaction-model.json](interaction-model.json). This will provide you with all necessary intents.
+4. Select "Build Model" (it will save model automatically)
 
 
 # 3. Implementation of state machine
