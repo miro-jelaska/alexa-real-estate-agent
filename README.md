@@ -1,4 +1,4 @@
-# Alexa Real estate agent protoype 🏡
+# Alexa Real estate agent prototype 🏡
 This is a documentation for a prototype of Amazon Alexa skill with multiple interconnected states.
 
 The idea was to create an Alexa Skill that guides a person through the process of buying or renting a real estate. Buying a real estate is high-risk situation and often a stressful one riddled with self-doubt and uncertainty. Alexa Real Estate Agent would help people structure their thoughts, introduce them to the important concepts, and give them advice on request. As a result, a person would be able to know what they want and why do they want it.
