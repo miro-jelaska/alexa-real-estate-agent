@@ -9,7 +9,7 @@ For example, if in a current state Alexa could ask how many rooms a person wants
 Sections:
 1. Storyline - Detailed description of the whole storyline
 2. How to replicate - Most important steps in replicating the skill
-3. Implementation - Technical details on how the state machine was implemented
+3. Implementation of state machine - Technical details on how the state machine was implemented
 
 **Note** This code was tested with AWS Lambda (released on 2017-4-18) running Node.js 6.10. It may become outdated.
 
@@ -36,5 +36,5 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 
 # 2. How to replicate
 
-# 3. How to replicate
+# 3. Implementation of state machine
 
