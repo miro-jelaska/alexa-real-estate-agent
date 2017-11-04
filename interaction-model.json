@@ -1,0 +1,60 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "Advice",
+        "samples": [
+          "i don't know",
+          "I'm not sure",
+          "can you explain"
+        ],
+        "slots": []
+      },
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NoIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.YesIntent",
+        "samples": []
+      },
+      {
+        "name": "Error",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "NumberOf",
+        "samples": [
+          "{numericalValue}",
+          "{numericalValue} rooms",
+          "{numericalValue} room",
+          "{numericalValue} people",
+          "{numericalValue} persons",
+          "{numericalValue} person",
+          "{numericalValue} man",
+          "I would like to have {numericalValue} of rooms"
+        ],
+        "slots": [
+          {
+            "name": "numericalValue",
+            "type": "AMAZON.NUMBER"
+          }
+        ]
+      }
+    ],
+    "invocationName": "real estate agent"
+  }
+}
