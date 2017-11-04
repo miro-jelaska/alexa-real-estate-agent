@@ -56,6 +56,16 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 [![Amazon Alexa skill pitch at "Let the machines talk" hackathon @Berlin](readme-resources/youtube-screenshot.png)](https://youtu.be/OKX5nA8ez_k?t=7m45s "Amazon Alexa skill pitch at Let the machines talk hackathon @Berlin")
 
 # 2. How to replicate
+These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
+
+## 2.1. Create interaction model
+1. Go to [Amazon Developer console](https://developer.amazon.com) > "Alexa"
+2. Pick "Get Started >" from "Alexa Skills Kit"
+
+<img src="readme-resources/alexa-skill-kit-get-started.png" alt="alexa-skill-kit-get-started" width="150"/> 
+3. Select "Add a New Skill" and fillout the "Skill information" tab as on the image below
+<img src="readme-resources/create-a-new-alexa-skill-01-skill-information.jpg" alt="alexa-skill-kit-get-started" /> 
+
 
 # 3. Implementation of state machine
 
