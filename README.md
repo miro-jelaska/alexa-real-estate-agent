@@ -33,11 +33,11 @@ There are also custom intentions
 Details of Advice and NumberOf implementations are mentioned in 2. How to replicate.
 
 ## 1.1. Storyline diagram
-The following image explains the meaning behing graphics used in the diagram.
+The following image explains the meaning behind graphics used in the diagram.
 
 ![diagram explanation](readme-resources/diagram-explanation.png)
 
-The next diagram depicts the whole storyline. Larger images and formats are provided as well.
+Next diagram depicts the whole storyline. Larger images and formats are provided as well.
 
 📥Download 
 [PNG HighRes (1.6 MB)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-high-resolution.png)
