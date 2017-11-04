@@ -14,7 +14,22 @@ Sections:
 **Note** This code was tested with AWS Lambda (released on 2017-4-18) running Node.js 6.10. It may become outdated.
 
 # 1. Storyline
+The storyline depicted in the diagram provided here exactly matches the one in the code. Storyline consists of states, intentions and things Alexa should say while transitioning from one state to another.
 
+Skill is using this intentions
+* AMAZON.CancelIntent (required)
+* AMAZON.HelpIntent (required)
+* AMAZON.NoIntent
+* AMAZON.StopIntent (require)
+* AMAZON.YesIntent
+where AMAZON.CancelIntent, AMAZON.HelpIntent, and AMAZON.StopIntent have been omitted from storyline for the sake of simplification.
+
+There are also custom intentions
+* Advice - Used when user is unsure or seeks help. Invocation examples: "I don't know.", "I'm not sure", "Can you help me out?"
+* Error
+* NumberOf{numericalValue} - Used for taking numerical inputs and storing them in a slot named "numericalValue". Invocation examples: "Five rooms", "One person"
+
+Details of Advice and NumberOf implementations are mentioned in 2. How to replicate.
 
 ## 1.1. Storyline diagram
 
