@@ -129,13 +129,12 @@ function gotoState(nextState, textOnTransition){
 This function enables you to transition to a next state. You can also define a ```textOnTransition``` - [SSML](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html) text - that Alexa should reproduce before transition happens, but this parameter is optional. It works in a way that Alexa first reproduces ```textOnTransition``` and then a text for a newly active state ```active.value.call(this)```.
 
 ## 2.1. On using Function.prototype.call() in JavaScript
-The state machine solution uses ```Function.prototype.call()```. For the explanation of this topic take a look at following sources:
+The state machine solution extensively uses ```Function.prototype.call()```. For an explanation of this topic take a look at following sources:
 * [developer.mozilla.org > Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
 * [You Don't Know JS : this & Object Prototypes > Chapter 2: this All Makes Sense Now! > Explicit Binding](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md#explicit-binding)
 
-
 ## 2.2. Debugging
-For debugging purposes ```console.log()``` in combination with AWS CloudWatch Management Console can be used. CloudWatch Management Console provides Logs where you can investigate output from your ```console.log()``` along with other information, warning, and errors.
+For debugging purposes ```console.log()``` in combination with AWS CloudWatch Management Console can be used. CloudWatch Management Console provides Logs where you can investigate output from your ```console.log()``` along with other information, warnings, and errors.
 
 # 3. How to replicate
 These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
