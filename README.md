@@ -3,9 +3,6 @@ This is a documentation for a prototype of Amazon Alexa skill with multiple inte
 
 The idea was to create an Alexa Skill that guides a person through the process of buying or renting a real estate. Buying a real estate is high-risk situation and often a stressful one riddled with self-doubt and uncertainty. Alexa Real Estate Agent would help people structure their thoughts, introduce them to the important concepts, and give them advice on request. As a result, a person would be able to know what they want and why do they want it.
 
-From a voice assistant standpoint this meant building some kind of storyline and from a technical standpoint this meant building some kind of state machine. For each interaction with a user Alexa skill would go from one state to another.
-For example, if in a current state Alexa could ask how many rooms a person wants to have in their new real estate. User could provide an exact number of rooms and trigger NumberOf intent, or he could trigger Advice intent by saying "I'm not sure.". Both intents, NumberOf and Advice, will change Alexa to another state appropriate for a storyline.
-
 Sections:
 1. Storyline - Detailed description of the whole storyline
 2. Implementation of state machine - Technical details on how the state machine was implemented
@@ -56,6 +53,89 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 [![Amazon Alexa skill pitch at "Let the machines talk" hackathon @Berlin](readme-resources/youtube-screenshot.png)](https://youtu.be/OKX5nA8ez_k?t=7m45s "Amazon Alexa skill pitch at Let the machines talk hackathon @Berlin")
 
 # 2. Implementation of state machine
+The idea was to create an Alexa Skill that guides a person through the process of buying or renting a real estate. From a voice assistant standpoint this meant building some kind of storyline and from a technical standpoint this meant building some kind of state machine. For each interaction with a user Alexa skill would go from one state to another.
+For example, if in a current state Alexa could ask how many rooms a person wants to have in their new real estate. User could provide an exact number of rooms and trigger NumberOf intent, or he could trigger Advice intent by saying "I'm not sure.". Both intents, NumberOf and Advice, will change Alexa to another state appropriate for a storyline.
+
+In case you are not familiar with Finite State Machines or State pattern I recommend exploring that topic before proceeding. This  documentation cannot fit a lecture on this topics but I will suggest few sources that might come in handy. Besides that you can surely find additional sources online.
+Few sources:
+ * [gameprogrammingpatterns.com > State pattern](http://gameprogrammingpatterns.com/state.html)
+ * [sourcemaking.com > State pattern](https://sourcemaking.com/design_patterns/state)
+ * [youtube > PatternCraft - State Pattern](https://youtu.be/yZt7mUVDijU)
+ * [dotnetcodr.com > Design patterns and practices in .NET: the State pattern](https://dotnetcodr.com/2013/05/16/design-patterns-and-practices-in-net-the-state-pattern/)
+
+There is only one active state and it's represented with global object called ```active```. This object contans all commands associated with current state. Commands are functions which are invoked for each of available intents e.g. ```yes()``` command which is invoked when ```AMAZON.YesIntent``` intent is invoked. There is also ```value()``` method which returns a [SSML](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html) text that should be reproduced  by Alexa when the state is loaded, e.d. for ```wellcome``` state Alexa will say ```Would you like to buy a house?```. Property ```id``` holds an uniqe ID for specific state. We find and replace states by their ID.
+
+This is how one state looks like:
+```javascript
+{
+    id: stateIds.roomSize_advice,
+    value: function() {
+        return 'To come up with a rough estimate, think about what your future needs will be. <break time="200ms"/> Current family size. Future family size. Do you have guests often? things like that. <break time="500ms"/> Is this enough information for you to take a guess?';
+    },
+    yes: function(){
+        gotoState.call(this, stateIds.roomSize);
+    },
+    no: function(){
+        gotoState.call(this, stateIds.roomSize_01_howManyPeople);
+    },
+}
+```
+
+All states are registered in object called ```stateCommands``` which serves as dictionary with stateId as key and command as a value e.g. ```stateCommands[stateIds.roomSize_01_howManyPeople]``` would return state object for state ```roomSize_01_howManyPeople```. To register a new state use ```addCommand(newCommand)``` function.
+
+```javascript
+function addCommand(newCommand){
+    newCommand.stop = function(){
+         gotoState.call(this, stateIds.exit, 'Ok, stoping now.');
+    }
+    newCommand.error = function(){
+        gotoState.call(this, active.id, 'I didn’t hear you well');
+    }
+    stateCommands[newCommand.id] = newCommand;
+}
+```
+This function not only registers a new state to the ```stateCommands``` dictionary but also adds some commands for ```stop``` and ```error``` which implementations are shared accross all of the states.
+
+Once we have registered all of the states we should define what state is going to be used as an initial one. For that matter we use ```initState()```.
+
+``` javascript
+function initState(){
+    active = stateCommands[stateIds.wellcome];
+    this.emit(':ask', active.value.call(this));
+}
+```
+This method should be invoked inside 'NewSession' handler like so:
+```javascript
+'NewSession': function() {
+        console.log('> NewSession');
+        initState.call(this);
+    },
+```
+
+To switch from one state to another use ```gotoState(nextState, textOnTransition)``` function. 
+```javascript
+function gotoState(nextState, textOnTransition){
+    if(nextState === stateIds.exit){
+        this.emit(':tell', textOnTransition);
+    } 
+    else {
+        var response = active.value.call(this);
+        var isDone = active.isDone;
+        active = stateCommands[nextState];
+        this.emit(':ask', (textOnTransition || '') +  active.value.call(this));
+    }
+}
+```
+This function enables you to transition to a next state. You can also define a ```textOnTransition``` - [SSML](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html) text - that Alexa should reproduce before transition happens, but this parameter is optional. It works in a way that Alexa first reproduces ```textOnTransition``` and then a text for a newly active state ```active.value.call(this)```.
+
+## 2.1. On using Function.prototype.call() in JavaScript
+The state machine solution uses ```Function.prototype.call()```. For the explanation of this topic take a look at following sources:
+* [developer.mozilla.org > Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
+* [You Don't Know JS : this & Object Prototypes > Chapter 2: this All Makes Sense Now! > Explicit Binding](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md#explicit-binding)
+
+
+## 2.2. Debugging
+For debugging purposes ```console.log()``` in combination with AWS CloudWatch Management Console can be used. CloudWatch Management Console provides Logs where you can investigate output from your ```console.log()``` along with other information, warning, and errors.
 
 # 3. How to replicate
 These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
