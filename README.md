@@ -79,12 +79,18 @@ These are just rough guides on how to replicate this skill and make it run. If y
 1. Go to [https://console.aws.amazon.com](https://console.aws.amazon.com)
 2. AWS Lambda could possibly not be available in your current region. You can select "US East (N.Virginia)" to ensure you have it. Note: This is advice can become obsolite. Play around a bit with region setting if this doesn't work out for you.
 3. Search and select "Lambda" from services
+
+<img src="readme-resources/create-a-new-alexa-skill-01-lambda-dashboard.jpg" /> 
+
 4. Press "Create function"
+<img src="readme-resources/create-a-new-alexa-skill-02-lambda-functions-create.jpg" /> 
 5. Press "Author from scratch"
+<img src="readme-resources/create-a-new-alexa-skill-03-lambda-author-from-scratch.jpg" /> 
 6. Enter custom name and roles
 7. Press "Create function"
 8. "Configuration" tab > "Function code" paster source code from [main.js](main.js)
 9. "Triggers" tab > "+ Add trigger" > Search for and select "Alexa Skills Kit" > Press "Submit"
+<img src="readme-resources/create-a-new-alexa-skill-04-lambda-add-trigger.jpg" /> 
 10. Press "Save"
 11. "Actions" > "Publish new version"
 12. Copy ARN, we will need it for the steps that follow
