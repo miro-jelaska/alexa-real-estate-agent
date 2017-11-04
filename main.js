@@ -12,7 +12,7 @@ exports.handler = function(event, context, callback) {
 
 /** Dictionary of statesIds with their unique values. Used primarily for convenience as enumeration. In ES6 I suggest using Symbols instead of unique strings. */
 const stateIds = {
-    wellcome: 'wellcome',
+    welcome: 'welcome',
     roomSize: 'roomSize',
     roomSize_advice: 'roomSize_advice',
     exit: 'exit',
@@ -39,7 +39,7 @@ function addCommand(newCommand){
 
 /** Sets system to the initial state. Since it is supposed to be triggered at "startup" it should be invoked inside 'NewSession'. */
 function initState(){
-    active = stateCommands[stateIds.wellcome];
+    active = stateCommands[stateIds.welcome];
     this.emit(':ask', active.value.call(this));
 }
 
@@ -58,7 +58,7 @@ function gotoState(nextState, textOnTransition){
 
 [
     {
-        id: stateIds.wellcome,
+        id: stateIds.welcome,
         value: function() {
             return 'Would you like to buy a house?';
         },
