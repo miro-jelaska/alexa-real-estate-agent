@@ -29,7 +29,7 @@ Sections:
 |
 [AI (458 KB)](https://github.com/MiroslavJelaska/alexa-real-estate-agent/raw/master/readme-resources/diagram.ai)
 
-## 1.2. Preview of the skill in action
+## 1.2. Preview of the storyline in action
 Here you can watch a part of a pitch where this prototype was used. It can give you a clear idea of how this storyline works in action. Pitch was given at "Let the machines talk" hackathon by FUNKE Digital GmbH (Berlin, Germany).
 
 [![Amazon Alexa skill pitch at "Let the machines talk" hackathon @Berlin](readme-resources/youtube-screenshot.png)](https://youtu.be/OKX5nA8ez_k?t=7m45s "Amazon Alexa skill pitch at Let the machines talk hackathon @Berlin")
