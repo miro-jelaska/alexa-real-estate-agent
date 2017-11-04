@@ -63,7 +63,7 @@ Few sources:
  * [youtube > PatternCraft - State Pattern](https://youtu.be/yZt7mUVDijU)
  * [dotnetcodr.com > Design patterns and practices in .NET: the State pattern](https://dotnetcodr.com/2013/05/16/design-patterns-and-practices-in-net-the-state-pattern/)
 
-There is only one active state and it's represented with global object called ```active```. This object contans all commands associated with current state. Commands are functions which are invoked for each of available intents e.g. ```yes()``` command which is invoked when ```AMAZON.YesIntent``` intent is invoked. There is also ```value()``` method which returns a [SSML](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html) text that should be reproduced  by Alexa when the state is loaded, e.d. for ```wellcome``` state Alexa will say ```Would you like to buy a house?```. Property ```id``` holds an uniqe ID for specific state. We find and replace states by their ID.
+There is only one active state and it's represented with global object called ```active```. This object contains all commands associated with current state. Commands are functions which are invoked for each of available intents e.g. ```yes()``` command which is invoked when ```AMAZON.YesIntent``` intent is invoked. There is also ```value()``` method which returns a [SSML](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html) text that should be reproduced  by Alexa when the state is loaded, e.d. for ```welcome``` state Alexa will say ```Would you like to buy a house?```. Property ```id``` holds an unique ID for specific state. We find and replace states by their ID.
 
 This is how one state looks like:
 ```javascript
@@ -100,7 +100,7 @@ Once we have registered all of the states we should define what state is going t
 
 ``` javascript
 function initState(){
-    active = stateCommands[stateIds.wellcome];
+    active = stateCommands[stateIds.welcome];
     this.emit(':ask', active.value.call(this));
 }
 ```
