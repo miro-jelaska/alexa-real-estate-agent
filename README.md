@@ -83,7 +83,7 @@ These are just rough guides on how to replicate this skill and make it run. If y
 <img src="readme-resources/create-a-new-alexa-skill-01-lambda-dashboard.jpg" /> 
 
 4. Press "Create function"
-<img src="readme-resources/create-a-new-alexa-skill-02-lambda-functions-create.jpg" /> 
+<img src="readme-resources/create-a-new-alexa-skill-022-lambda-functions-create.jpg" /> 
 5. Press "Author from scratch"
 <img src="readme-resources/create-a-new-alexa-skill-03-lambda-author-from-scratch.jpg" /> 
 6. Enter custom name and roles
