@@ -8,8 +8,8 @@ For example, if in a current state Alexa could ask how many rooms a person wants
 
 Sections:
 1. Storyline - Detailed description of the whole storyline
-2. How to replicate - Most important steps in replicating the skill
-3. Implementation of state machine - Technical details on how the state machine was implemented
+2. Implementation of state machine - Technical details on how the state machine was implemented
+3. How to replicate - Most important steps in replicating the skill
 
 **Note** This code was tested with AWS Lambda (released on 2017-4-18) running Node.js 6.10. It may become outdated.
 
@@ -55,10 +55,12 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 
 [![Amazon Alexa skill pitch at "Let the machines talk" hackathon @Berlin](readme-resources/youtube-screenshot.png)](https://youtu.be/OKX5nA8ez_k?t=7m45s "Amazon Alexa skill pitch at Let the machines talk hackathon @Berlin")
 
-# 2. How to replicate
+# 2. Implementation of state machine
+
+# 3. How to replicate
 These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
 
-## 2.1. Creating basic skill
+## 3.1. Creating basic skill
 1. Go to [https://developer.amazon.com](https://developer.amazon.com) > "Alexa"
 2. Pick "Get Started >" from "Alexa Skills Kit"
 
@@ -69,13 +71,13 @@ These are just rough guides on how to replicate this skill and make it run. If y
 4. Press "Save"
 5. Press "Next" which will lead you to "Interaction Model" tab. Continue to 2.2. Inteaction model
 
-## 2.2 Interaction model
+## 3.2 Interaction model
 1. Lanuch "Skill Builder" (which is curently in beta)
 2. Go to "Code Editor" tab
 3. Either upload interaction model JSON file or copy/paste content from provided interaction model. 📥 Download [interaction-model.json](interaction-model.json). This will provide you with all necessary intents.
 4. Select "Build Model" (it will save model automatically)
 
-## 2.3. Create Lambda for the skill
+## 3.3. Create Lambda for the skill
 1. Go to [https://console.aws.amazon.com](https://console.aws.amazon.com)
 2. AWS Lambda could possibly not be available in your current region. You can select "US East (N.Virginia)" to ensure you have it. Note: This is advice can become obsolite. Play around a bit with region setting if this doesn't work out for you.
 3. Search and select "Lambda" from services
@@ -95,7 +97,7 @@ These are just rough guides on how to replicate this skill and make it run. If y
 11. "Actions" > "Publish new version"
 12. Copy ARN, we will need it for the steps that follow
 
-## 2.4. Adding lambda to the skill
+## 3.4. Adding lambda to the skill
 1. Head back to Amazon developer console page for your skill, somehow. (At the moment of writing this "Skill information" button in Skill Builder Beta works just fine).
 2. Go to "Configuration" tab
 3. Select "AWS Lambda ARN (Amazon Resource Name) Recommended"
@@ -103,6 +105,3 @@ These are just rough guides on how to replicate this skill and make it run. If y
 5. Select "Next"
 
 If you've managed to find your way throught you should be ready to test and use the skill. Congrats! 🎉
-
-# 3. Implementation of state machine
-
