@@ -15,7 +15,7 @@ const stateIds = {
     wellcome: 'wellcome',
     roomSize: 'roomSize',
     roomSize_advice: 'roomSize_advice',
-    exit: 'exitEXIT',
+    exit: 'exit',
     roomSize_01_howManyPeople: 'roomSize_01_howManyPeople',
     roomSize_02_fiveYearsOrMore: 'roomSize_02_fiveYearsOrMore',
     roomSize_03_numberOfPeopleInFiveYears: 'roomSize_03_numberOfPeopleInFiveYears',
