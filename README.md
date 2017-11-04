@@ -59,7 +59,7 @@ Here you can watch a part of a pitch where this prototype was used. It can give 
 These are just rough guides on how to replicate this skill and make it run. If you have no prior experience using [Alexa Skill Kit](https://developer.amazon.com/alexa-skills-kit) (aka ASK) I advise finding out more about it before proceeding on because this documentation is not meant to be used as introduction to Alexa Skill Kit and development.
 
 ## 2.1. Creating basic skill
-1. Go to [Amazon Developer console](https://developer.amazon.com) > "Alexa"
+1. Go to [https://developer.amazon.com](https://developer.amazon.com) > "Alexa"
 2. Pick "Get Started >" from "Alexa Skills Kit"
 
 <img src="readme-resources/alexa-skill-kit-get-started.png" alt="alexa-skill-kit-get-started" width="150"/> 
@@ -75,6 +75,24 @@ These are just rough guides on how to replicate this skill and make it run. If y
 3. Either upload interaction model JSON file or copy/paste content from provided interaction model. 📥 Download [interaction-model.json](interaction-model.json). This will provide you with all necessary intents.
 4. Select "Build Model" (it will save model automatically)
 
+## 2.3. Create Lambda for the skill
+1. Go to [https://console.aws.amazon.com](https://console.aws.amazon.com)
+2. AWS Lambda could possibly not be available in your current region. You can select "US East (N.Virginia)" to ensure you have it. Note: This is advice can become obsolite. Play around a bit with region setting if this doesn't work out for you.
+3. Search and select "Lambda" from services
+4. Press "Create function"
+5. Press "Author from scratch"
+6. Enter custom name and roles
+7. Press "Create function"
+8. "Configuration" tab > "Function code" paster source code from [main.js](main.js)
+9. "Triggers" tab > "+ Add trigger" > Search for and select "Alexa Skills Kit" > Press "Submit"
+10. Press "Save"
+11. "Actions" > "Publish new version"
+12. Copy ARN, we will need it for the steps that follow
+
+## 2.4. Adding lambda to the skill
+1. Head back to Amazon developer console page for your skill, somehow. (At the moment of writing this "Skill information" button in Skill Builder Beta works just fine).
+2. Go to "Configuration" tab
+3.
 
 # 3. Implementation of state machine
 
