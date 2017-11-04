@@ -92,7 +92,11 @@ These are just rough guides on how to replicate this skill and make it run. If y
 ## 2.4. Adding lambda to the skill
 1. Head back to Amazon developer console page for your skill, somehow. (At the moment of writing this "Skill information" button in Skill Builder Beta works just fine).
 2. Go to "Configuration" tab
-3.
+3. Select "AWS Lambda ARN (Amazon Resource Name) Recommended"
+4. Enter your ARN in the "Default" field
+5. Select "Next"
+
+If you've managed to find your way throught you should be ready to test and use the skill. Congrats! 🎉
 
 # 3. Implementation of state machine
 
