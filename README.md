@@ -22,6 +22,7 @@ Skill is using this intentions
 * AMAZON.NoIntent
 * AMAZON.StopIntent (require)
 * AMAZON.YesIntent
+
 where AMAZON.CancelIntent, AMAZON.HelpIntent, and AMAZON.StopIntent have been omitted from storyline for the sake of simplification.
 
 There are also custom intentions
@@ -32,10 +33,13 @@ There are also custom intentions
 Details of Advice and NumberOf implementations are mentioned in 2. How to replicate.
 
 ## 1.1. Storyline diagram
+The following image explains the meaning behing graphics used in the diagram.
 
-[![Storyline diagram](readme-resources/diagram-low-resolution.png)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-medium-resolution.png "Click to open larger diagram")
+![diagram explanation](readme-resources/diagram-explanation.png)
 
-📥Download diagram:
+The next diagram depicts the whole storyline. Larger images and formats are provided as well.
+
+📥Download 
 [PNG HighRes (1.6 MB)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-high-resolution.png)
 |
 [PNG MediumRes (600 KB)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-medium-resolution.png)
@@ -43,6 +47,8 @@ Details of Advice and NumberOf implementations are mentioned in 2. How to replic
 [PDF (490 KB)](https://github.com/MiroslavJelaska/alexa-real-estate-agent/raw/master/readme-resources/diagram.ai)
 |
 [AI (458 KB)](https://github.com/MiroslavJelaska/alexa-real-estate-agent/raw/master/readme-resources/diagram.ai)
+
+[![Storyline diagram](readme-resources/diagram-low-resolution.png)](https://raw.githubusercontent.com/MiroslavJelaska/alexa-real-estate-agent/master/readme-resources/diagram-medium-resolution.png "Click to open larger diagram")
 
 ## 1.2. Preview of the storyline in action
 Here you can watch a part of a pitch where this prototype was used. It can give you a clear idea of how this storyline works in action. Pitch was given at "Let the machines talk" hackathon by FUNKE Digital GmbH (Berlin, Germany).
